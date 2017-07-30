@@ -159,7 +159,7 @@ class OutputCreator(object):
                     nums.append(int(k))
                 nums.sort()
                 for num in nums:
-                    temp.append(d[str(num)])
+                    temp.append(d[num])
                 return self._dict_to_array(temp)
         return d
 
@@ -171,12 +171,15 @@ class OutputCreator(object):
 
 if __name__ == '__main__':
 
-    i = {'key': 134123, 'data': {'point1': 1234534, 'point2': 123546765}}
+    i = {'key': 134123, 'data': {'point1': 1234534, 'point2': 123546765, "arr": [{"this": 23}, {"that": 345}]}}
 
     path_map = {
-        '$.key': '$.data.point1',
+        '$.key.value': '$.data.point1',
         '$.data.point1': '$.key',
-        '$.data.point3': '$.data.point2'
+        '$.data.point3': '$.data.point2',
+        '$.data.point5': '$.data.arr[0].this',
+        '$.data.arr[0].this': '$.data.point1',
+        '$.data.arr[1].this': '$.data.point2'
     }
 
     oc = OutputCreator(i)
